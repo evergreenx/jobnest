@@ -22,7 +22,7 @@ export default function SearchInput({
 
   return (
     <motion.div
-      className="h-[44px] px-[16px] lg:w-[320px] rounded-[8px] my-[10px] flex items-center space-x-[12px] bg-[#2B2B2B]"
+      className="h-[44px] px-[16px] lg:w-[320px] w-full rounded-[8px] my-[10px] flex items-center space-x-[12px] bg-[#2B2B2B]"
       initial="hidden"
       animate="visible"
       variants={fadeInVariants}
@@ -55,13 +55,14 @@ export default function SearchInput({
           e.preventDefault();
           refetch();
         }}
+        className="w-full p-1"
       >
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search for company or roles..."
-          className="w-full bg-[#2B2B2B] placeholder:text-[#fff] outline-none rounded-[8px] text-[#fff] text-sm font-normal"
+          className=" bg-[#2B2B2B] placeholder:text-[#fff] outline-none w-full text-[#fff] text-sm font-normal"
         />
       </form>
     </motion.div>
