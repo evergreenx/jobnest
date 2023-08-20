@@ -6,8 +6,9 @@ import ContentLoader from "react-content-loader";
 const JobCardsLoader = (props: any) => (
   <ContentLoader
     speed={1}
-    width={382}
-    height={232}
+ 
+
+    className="  h-[232px] w-full lg:w-[381px] "
     viewBox="0 0 382 232"
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"

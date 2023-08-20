@@ -26,7 +26,7 @@ function Jobs() {
           },
         },
       }}
-      className={` ${inter.className} bg-[#1F1F1F]`}
+      className={` ${inter.className} h-screen bg-[#1F1F1F]`}
     >
       <div
         className="
@@ -47,7 +47,7 @@ function Jobs() {
 
         <SearchInput />
 
-        <div
+        {/* <div
           className="grid mt-[24px]
       
       
@@ -63,7 +63,7 @@ function Jobs() {
         <JobCardsLoader />
         <JobCardsLoader />
 
-        </div>
+        </div> */}
 
         <div
           className="grid mt-[24px]
@@ -77,7 +77,7 @@ function Jobs() {
           <JobCard />
           <JobCard />
           <JobCard />
-          <JobCard />J
+          <JobCard />
         </div>
       </div>
     </motion.div>
