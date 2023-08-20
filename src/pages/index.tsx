@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import React, { useEffect, useState } from "react";
 import { motion, Variants, animate, useAnimation } from "framer-motion";
 import Link from "next/link";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Poppins({ weight: ["400"] , subsets: ["devanagari"] });
 
 export default function Home() {
   const variants1 = {
@@ -104,7 +104,7 @@ export default function Home() {
         </svg>
       </Link>
 
-      <div className="flex space-x-2 my-3">
+      {/* <div className="flex space-x-2 my-3">
         {companies.map((company: any, index: any) => (
           <motion.div
             key={index}
@@ -117,7 +117,7 @@ export default function Home() {
             <CompanyPill key={index} {...company} />
           </motion.div>
         ))}
-      </div>
+      </div> */}
     </main>
   );
 }
