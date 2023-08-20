@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Salsa } from "next/font/google";
 
 import SearchInput from "@/components/Search";
+import JobCardsLoader from "@/components/Skeleton/JobCards";
 
 const inter = Salsa({ weight: ["400"], subsets: ["latin"] });
 
@@ -55,10 +56,28 @@ function Jobs() {
       gap-x-[20px] gap-y-[20px]
       lg:grid-cols-3 place-content-evenly"
         >
+
+        <JobCardsLoader />
+        <JobCardsLoader />
+        <JobCardsLoader />
+        <JobCardsLoader />
+        <JobCardsLoader />
+
+        </div>
+
+        <div
+          className="grid mt-[24px]
+      
+      
+      grid-cols-1 md:grid-cols-2 
+      
+      gap-x-[20px] gap-y-[20px]
+      lg:grid-cols-3 place-content-evenly"
+        >
           <JobCard />
           <JobCard />
           <JobCard />
-          <JobCard />
+          <JobCard />J
         </div>
       </div>
     </motion.div>
