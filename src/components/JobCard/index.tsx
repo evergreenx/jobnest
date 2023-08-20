@@ -85,8 +85,8 @@ function JobCard(props: JobCardProps) {
             )}
 
             <div>
-              <h3 className="text-lg font-bold">
-                {props.job.job_title.slice(0, 20)}
+              <h3 className="lg:text-lg text-base font-bold">
+                {props.job.job_title.slice(0, 15) + "..."}
               </h3>
               <p className="text-sm font-medium">
                 {props.job.employer_name.slice(0, 20)}

@@ -18,11 +18,7 @@ function Jobs() {
 
   const [searchTerm, setSearchTerm] = React.useState<string>("javascript");
 
-
-  const { data, isLoading, isFetching , refetch } = useFetchJobs(searchTerm);
-
-  
-
+  const { data, isLoading, isFetching, refetch } = useFetchJobs(searchTerm);
 
   return (
     <motion.div
@@ -56,8 +52,10 @@ function Jobs() {
           Find Jobs
         </motion.h1>
 
-        <SearchInput setSearchTerm={setSearchTerm} searchTerm={searchTerm} 
-        refetch = {refetch}
+        <SearchInput
+          setSearchTerm={setSearchTerm}
+          searchTerm={searchTerm}
+          refetch={refetch}
         />
 
         {/* <div
@@ -78,8 +76,6 @@ function Jobs() {
 
         </div> */}
 
-        {isFetching && "Fetching jobs around the globe ..."}
-
         <div
           className="grid mt-[24px]
       
@@ -89,10 +85,11 @@ function Jobs() {
       gap-x-[20px] gap-y-[20px]
       lg:grid-cols-3 place-content-evenly"
         >
-          {data &&
-            data.data?.map((job: JobPosting) => {
-              return <JobCard job={job} key={job.job_id} />;
-            })}
+          {data && !isFetching
+            ? data.data?.map((job: JobPosting) => {
+                return <JobCard job={job} key={job.job_id} />;
+              })
+            : ' "Fetching jobs around the globe ..."'}
         </div>
       </div>
     </motion.div>
