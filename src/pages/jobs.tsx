@@ -1,7 +1,11 @@
 import JobCard from "@/components/JobCard";
 import React from "react";
 import { motion } from "framer-motion";
+import { Salsa } from "next/font/google";
+
 import SearchInput from "@/components/Search";
+
+const inter = Salsa({ weight: ["400"], subsets: ["latin"] });
 
 function Jobs() {
   const FADE_DOWN_ANIMATION_VARIANTS = {
@@ -21,7 +25,7 @@ function Jobs() {
           },
         },
       }}
-      className="bg-[#1F1F1F]"
+      className={` ${inter.className} bg-[#1F1F1F]`}
     >
       <div
         className="

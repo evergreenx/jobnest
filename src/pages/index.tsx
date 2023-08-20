@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { Poppins } from "next/font/google";
+import { Adamina } from "next/font/google";
 import React, { useEffect, useState } from "react";
 import { motion, Variants, animate, useAnimation } from "framer-motion";
 import Link from "next/link";
 
-const inter = Poppins({ weight: ["400"] , subsets: ["devanagari"] });
+const inter = Adamina({ weight: ["400"] , subsets: ["latin"] });
 
 export default function Home() {
   const variants1 = {
