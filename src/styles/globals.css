@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+.bg-card {
+
+    background-image: url("../images//bg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-card2 {
+
+    background-image: url("../images/cardbg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
