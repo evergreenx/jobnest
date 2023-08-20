@@ -26,7 +26,7 @@ function Jobs() {
       <div
         className="
       
-     h-screen
+   
     text-white  p-[12px] 
     
     
@@ -54,7 +54,7 @@ function Jobs() {
           <JobCard />
           <JobCard />
           <JobCard />
-          <JobCard />S
+          <JobCard />
         </div>
       </div>
     </motion.div>
