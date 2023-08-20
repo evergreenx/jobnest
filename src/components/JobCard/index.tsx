@@ -3,8 +3,15 @@ import React from "react";
 import TimeIcon from "../../images/time.svg";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { JobPosting } from "../../../interface";
+import Link from "next/link";
+import { format, formatDistance, formatRelative, subDays } from "date-fns";
 
-function JobCard() {
+interface JobCardProps {
+  job: JobPosting;
+}
+
+function JobCard(props: JobCardProps) {
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
@@ -28,7 +35,9 @@ function JobCard() {
         
         "
         >
-          <p className="text-sm font-bold">View</p>
+          <Link href={props.job.job_apply_link} className="text-sm font-bold">
+            View
+          </Link>
           <svg
             width="16"
             height="17"
@@ -65,47 +74,23 @@ function JobCard() {
 
         <div className="px-[16px]  py-[18px] ">
           <div className="top mb-[18px] flex space-x-[12px]">
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 48 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="48" height="48" rx="8" fill="#1F1F1F" />
-              <g clip-path="url(#clip0_1_1251)">
-                <path
-                  d="M37.3616 24.3102C37.3616 23.1624 37.2685 22.3248 37.0669 21.4562H23.96V26.6368H31.6534C31.4984 27.9243 30.6608 29.8632 28.7994 31.1661L28.7733 31.3395L32.9175 34.5499L33.2046 34.5786C35.8414 32.1433 37.3616 28.5602 37.3616 24.3102Z"
-                  fill="#FBFBFB"
-                />
-                <path
-                  d="M23.96 37.96C27.7292 37.96 30.8934 36.7191 33.2046 34.5786L28.7994 31.1661C27.6206 31.9882 26.0385 32.5621 23.96 32.5621C20.2684 32.5621 17.1352 30.1269 16.0183 26.761L15.8546 26.7749L11.5454 30.1098L11.489 30.2664C13.7847 34.8267 18.5001 37.96 23.96 37.96Z"
-                  fill="#FBFBFB"
-                />
-                <path
-                  d="M16.0183 26.761C15.7235 25.8924 15.553 24.9616 15.553 24C15.553 23.0383 15.7235 22.1076 16.0027 21.239L15.9949 21.054L11.6318 17.6656L11.489 17.7335C10.5429 19.6258 10 21.7509 10 24C10 26.2491 10.5429 28.3741 11.489 30.2664L16.0183 26.761Z"
-                  fill="#FBFBFB"
-                />
-                <path
-                  d="M23.96 15.4378C26.5813 15.4378 28.3496 16.5701 29.3578 17.5164L33.2977 13.6696C30.878 11.4205 27.7292 10.04 23.96 10.04C18.5001 10.04 13.7847 13.1732 11.489 17.7335L16.0028 21.239C17.1352 17.8731 20.2684 15.4378 23.96 15.4378Z"
-                  fill="#FBFBFB"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_1_1251">
-                  <rect
-                    width="27.3616"
-                    height="28"
-                    fill="white"
-                    transform="translate(10 10)"
-                  />
-                </clipPath>
-              </defs>
-            </svg>
+            {props.job.employer_logo ? (
+              <img
+                src={props.job.employer_logo}
+                alt="company logo"
+                className="w-[40px] h-[40px] rounded-[8px] object-cover"
+              />
+            ) : (
+              <div className="w-[40px] h-[40px] rounded-[8px] bg-[#2B2B2B]"></div>
+            )}
 
             <div>
-              <h3 className="text-lg font-bold">Sr. UX Designer</h3>
-              <p className="text-sm font-medium">Google</p>
+              <h3 className="text-lg font-bold">
+                {props.job.job_title.slice(0, 20)}
+              </h3>
+              <p className="text-sm font-medium">
+                {props.job.employer_name.slice(0, 20)}
+              </p>
             </div>
           </div>
 
@@ -142,13 +127,17 @@ function JobCard() {
                     </clipPath>
                   </defs>
                 </svg>
-                New York
+                {props.job.job_city
+                  ? props.job.job_city.slice(0, 5) + "..."
+                  : props.job.job_country
+                  ? props.job.job_country.slice(0, 20)
+                  : "No Location"}
               </p>
 
               <p
                 className="text-sm flex items-center
                 tracking-tighter
-                h-[28px]
+                h-[28px] capitalize
               border-pill-border
               font-medium rounded-[24px] bg-pill border py-[6px] px-[12px]"
               >
@@ -172,15 +161,14 @@ function JobCard() {
                     </clipPath>
                   </defs>
                 </svg>
-                Full Time
+                {props.job.job_employment_type.toLocaleLowerCase()}
               </p>
             </div>
           </div>
 
           <div className="jobdesc">
             <p className="text-sm  tracking-wide">
-              UX Designers are the synthesis of design and development. They
-              take Google most innovative
+              {props.job.job_description.slice(0, 100) + "..."}
             </p>
           </div>
         </div>
@@ -194,7 +182,15 @@ function JobCard() {
         >
           <p className="text-sm font-medium flex items-center">
             <Image src={TimeIcon} alt="time icon" className="mr-1" />
-            posted 2 days ago
+
+            {/* format date in days ago format  */}
+            {formatDistance(
+              new Date(props.job.job_posted_at_datetime_utc),
+              new Date(),
+              {
+                addSuffix: true,
+              }
+            )}
           </p>
 
           <p className="font-bold text-lg t">$50K/mo</p>

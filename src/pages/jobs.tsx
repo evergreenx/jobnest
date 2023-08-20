@@ -5,6 +5,8 @@ import { Salsa } from "next/font/google";
 
 import SearchInput from "@/components/Search";
 import JobCardsLoader from "@/components/Skeleton/JobCards";
+import { useFetchJobs } from "@/hooks/useFetchJobs";
+import { JobPosting } from "../../interface";
 
 const inter = Salsa({ weight: ["400"], subsets: ["latin"] });
 
@@ -13,6 +15,9 @@ function Jobs() {
     hidden: { opacity: 0, y: -10 },
     show: { opacity: 1, y: 0, transition: { type: "spring" } },
   };
+
+  const { data, isLoading, isFetching } = useFetchJobs();
+
   return (
     <motion.div
       initial="hidden"
@@ -26,7 +31,7 @@ function Jobs() {
           },
         },
       }}
-      className={` ${inter.className} h-screen bg-[#1F1F1F]`}
+      className={` ${inter.className} h- bg-[#1F1F1F]`}
     >
       <div
         className="
@@ -65,6 +70,9 @@ function Jobs() {
 
         </div> */}
 
+        {isFetching && "Fetching..."}
+
+
         <div
           className="grid mt-[24px]
       
@@ -74,11 +82,12 @@ function Jobs() {
       gap-x-[20px] gap-y-[20px]
       lg:grid-cols-3 place-content-evenly"
         >
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-        </div>
+        {data &&
+          data.data?.map((job: JobPosting) => {
+            return <JobCard job={job} key={job.job_id} />;
+          })}
+
+       </div>
       </div>
     </motion.div>
   );
