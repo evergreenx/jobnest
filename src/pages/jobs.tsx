@@ -16,7 +16,13 @@ function Jobs() {
     show: { opacity: 1, y: 0, transition: { type: "spring" } },
   };
 
-  const { data, isLoading, isFetching } = useFetchJobs();
+  const [searchTerm, setSearchTerm] = React.useState<string>("javascript");
+
+
+  const { data, isLoading, isFetching , refetch } = useFetchJobs(searchTerm);
+
+  
+
 
   return (
     <motion.div
@@ -50,7 +56,9 @@ function Jobs() {
           Find Jobs
         </motion.h1>
 
-        <SearchInput />
+        <SearchInput setSearchTerm={setSearchTerm} searchTerm={searchTerm} 
+        refetch = {refetch}
+        />
 
         {/* <div
           className="grid mt-[24px]
@@ -70,8 +78,7 @@ function Jobs() {
 
         </div> */}
 
-        {isFetching && "Fetching..."}
-
+        {isFetching && "Fetching jobs around the globe ..."}
 
         <div
           className="grid mt-[24px]
@@ -82,12 +89,11 @@ function Jobs() {
       gap-x-[20px] gap-y-[20px]
       lg:grid-cols-3 place-content-evenly"
         >
-        {data &&
-          data.data?.map((job: JobPosting) => {
-            return <JobCard job={job} key={job.job_id} />;
-          })}
-
-       </div>
+          {data &&
+            data.data?.map((job: JobPosting) => {
+              return <JobCard job={job} key={job.job_id} />;
+            })}
+        </div>
       </div>
     </motion.div>
   );

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { motion, Variants, animate, useAnimation } from "framer-motion";
 import Link from "next/link";
 
-const inter = Adamina({ weight: ["400"] , subsets: ["latin"] });
+const inter = Adamina({ weight: ["400"], subsets: ["latin"] });
 
 export default function Home() {
   const variants1 = {
@@ -14,38 +14,6 @@ export default function Home() {
 
   const [isVisible, setIsVisible] = useState(false);
   const controls = useAnimation();
-
-  const companies = [
-    {
-      name: "Company A",
-      description: "Leading in technology solutions",
-      logo: "company-a-logo.jpg",
-    },
-    {
-      name: "Company B",
-      description: "Innovative design and development",
-      logo: "company-b-logo.jpg",
-    },
-    // Add more companies as needed
-  ];
-
-  useEffect(() => {
-    // Function to animate the companies one by one
-    const animateCompanies = async () => {
-      await animateCompaniesOneByOne(0);
-      setIsVisible(true);
-    };
-
-    // Recursive function to animate companies with a stagger effect
-    const animateCompaniesOneByOne = async (index: any) => {
-      if (index < companies.length) {
-        await controls.start({ opacity: 1, y: 0 });
-        await animateCompaniesOneByOne(index + 1);
-      }
-    };
-
-    animateCompanies();
-  }, []);
 
   const fadeInUpVariants: Variants = {
     initial: { opacity: 0, y: -20 },

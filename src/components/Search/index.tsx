@@ -1,7 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function SearchInput() {
+export default function SearchInput({
+  setSearchTerm,
+  searchTerm,
+  refetch = () => {},
+}: {
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  searchTerm: string;
+  refetch?: () => void;
+}) {
   const fadeInVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -42,11 +50,20 @@ export default function SearchInput() {
         />
       </svg>
 
-      <input
-        type="text"
-        placeholder="Search for company or roles..."
-        className="w-full bg-[#2B2B2B] placeholder:text-[#fff] outline-none rounded-[8px] text-[#fff] text-sm font-normal"
-      />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          refetch();
+        }}
+      >
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search for company or roles..."
+          className="w-full bg-[#2B2B2B] placeholder:text-[#fff] outline-none rounded-[8px] text-[#fff] text-sm font-normal"
+        />
+      </form>
     </motion.div>
   );
 }

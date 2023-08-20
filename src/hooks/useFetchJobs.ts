@@ -1,18 +1,17 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 
-export function useFetchJobs() {
+export function useFetchJobs(searchTerm = "") {
   const query = useQuery(
     "jobs",
     async () => {
       try {
         const res = await axios.get(
-          "https://jsearch.p.rapidapi.com/search?query=java",
+          `${process.env.NEXT_PUBLIC_API_URL}search?query=${searchTerm}`,
           {
             headers: {
-              "X-RapidAPI-Key":
-                "2f56c197d5mshf779d2fec591204p1bcbffjsn24d155b82ae2",
-              "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+              "X-RapidAPI-Key": `${process.env.NEXT_PUBLIC_XRAPIDAPI_KEY}`,
+              "X-RapidAPI-Host": `${process.env.NEXT_PUBLIC_XRAPIDAPI_HOST}`,
             },
           }
         );
